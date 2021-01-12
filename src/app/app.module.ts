@@ -5,11 +5,18 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { Footercomponent } from './footer/footer.component';
 import { DirectivaComponent } from './directiva/directiva.component';
+import { ClientesComponent } from './clientes/clientes.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, Footercomponent, DirectivaComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    Footercomponent,
+    DirectivaComponent,
+    ClientesComponent,
+  ],
   imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
