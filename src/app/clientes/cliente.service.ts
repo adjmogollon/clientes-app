@@ -12,7 +12,7 @@ export class ClienteService {
   constructor(private http: HttpClient) {}
 
   getClientes(): Observable<Cliente[]> {
-    //return this.http.get<Cliente[]>(this.urlEndPoint);
+    // return this.http.get<Cliente[]>(this.urlEndPoint);
     return this.http
       .get(this.urlEndPoint)
       .pipe(map((response) => response as Cliente[]));
