@@ -31,7 +31,7 @@
             <button type="button" class="btn btn-primary btn-rounded" [routerLink]="['/clientes/form',cliente.id]" >Editar</button>
           </td>
           <td>
-            <button type="button" class="btn btn-danger btn-rounded">Eliminar</button>
+            <button type="button" (click)='delete(cliente)' class="btn btn-danger btn-rounded">Eliminar</button>
           </td>
         </tr>
       </tbody>
