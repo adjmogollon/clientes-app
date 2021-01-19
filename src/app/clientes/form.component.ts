@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Cliente } from './cliente';
 import { ClienteService } from './cliente.service';
 import Swal from 'sweetalert2';
@@ -15,7 +15,7 @@ export class FormComponent implements OnInit {
 
   constructor(
     private clienteService: ClienteService,
-    private router: Router,
+    private route: Router,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
     this.cargarCliente();
   }
 
-  cargarCliente(): void {
+  public cargarCliente(): void {
     this.activatedRoute.params.subscribe((params) => {
       let id = params['id'];
       if (id) {
@@ -34,25 +34,42 @@ export class FormComponent implements OnInit {
     });
   }
 
-  create(): void {
-    this.clienteService.create(this.cliente).subscribe((cliente) => {
-      this.router.navigate(['/clientes']),
+  public create(): void {
+    console.log('Clicked');
+    console.log(this.cliente);
+    this.clienteService.create(this.cliente).subscribe(
+      (response) => {
+        this.route.navigate(['/clientes']);
         Swal.fire(
           'Nuevo Cliente',
           `Cliente ${this.cliente.nombre} creado son exito`,
           'success'
         );
-    });
+      },
+      (err) => {
+        this.errores = err.error.errors as string[];
+        console.error('Codigo del error desde el backend: ' + err.status);
+        console.error(err.error.errors);
+
+      }
+    );
   }
 
-  update(): void {
-    this.clienteService.update(this.cliente).subscribe((cliente) => {
-      this.router.navigate(['/clientes']);
-      Swal.fire(
-        'Cliente Actualizado',
-        `Cliente ${this.cliente.nombre} actualizado son exito`,
-        'success'
-      );
-    });
+  public update(): void {
+    this.clienteService.update(this.cliente).subscribe(
+      (response) => {
+        this.route.navigate(['/clientes']);
+        Swal.fire(
+          'Cliente Actualizado',
+          `Cliente ${this.cliente.nombre} actualizado con exito`,
+          'success'
+        );
+      },
+      (err) => {
+        this.errores = err.error.errors as string[];
+        console.error('Codigo del error desde el backed: ' + err.status);
+        console.error(err.error.errors);
+      }
+    );
   }
 }
