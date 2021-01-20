@@ -14,17 +14,18 @@ export class ClientesComponent implements OnInit {
   constructor(private clienteService: ClienteService) {}
 
   ngOnInit(): void {
+    let page = 0;
     this.clienteService
-      .getClientes()
+      .getClientes(page)
       .pipe(
-        tap((clientes) => {
+        tap((response) => {
           console.log('ClientesComponent: tap 3');
-          clientes.forEach((cliente) => {
+          (response.content as Cliente[]).forEach((cliente) => {
             console.log(cliente.nombre);
           });
         })
       )
-      .subscribe((clientes) => (this.clientes = clientes));
+      .subscribe((response) => (this.clientes = response.content as Cliente[]));
   }
 
   delete(cliente: Cliente): void {
