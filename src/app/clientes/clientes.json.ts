@@ -7,6 +7,7 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Mogollon',
     email: 'adjmogollon@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Castillo',
     email: 'alixicastillo59@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
   {
     id: 3,
@@ -21,6 +23,7 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Mogollon R',
     email: 'anibalmogollon52@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
   {
     id: 4,
@@ -28,6 +31,7 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Cervantes',
     email: 'miguelcervantes@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
   {
     id: 5,
@@ -35,6 +39,7 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Marquez',
     email: 'gabrielmarquez@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
   {
     id: 6,
@@ -42,6 +47,7 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Dumas',
     email: 'alexanderdumas@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
   {
     id: 7,
@@ -49,6 +55,7 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Belacqua',
     email: 'lyrabelacqua@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
   {
     id: 8,
@@ -56,6 +63,7 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Coulter',
     email: 'marisacoulter@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
   {
     id: 9,
@@ -63,6 +71,7 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Byrnison',
     email: 'IorekByrnison@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
   {
     id: 10,
@@ -70,6 +79,7 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Asriel',
     email: 'LordAsriel@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
   {
     id: 11,
@@ -77,6 +87,7 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Parry',
     email: 'WillParry@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
   {
     id: 12,
@@ -84,5 +95,6 @@ export const CLIENTES: Cliente[] = [
     apellido: 'Pekkala',
     email: 'SerafinaPekkala@gmail.com',
     createAt: '2020-12-17',
+    foto: '',
   },
 ];
