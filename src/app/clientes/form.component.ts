@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Cliente } from './cliente';
 import { ClienteService } from './cliente.service';
 import Swal from 'sweetalert2';
+import { Region } from './region';
 
 @Component({
   selector: 'app-form',
@@ -11,6 +12,7 @@ import Swal from 'sweetalert2';
 export class FormComponent implements OnInit {
   public titulo: string = 'Crear Cliente';
   public cliente: Cliente = new Cliente();
+  public regiones: Region[];
   public errores: string[];
 
   constructor(
@@ -21,6 +23,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarCliente();
+    this.cargarRegiones();
   }
 
   public cargarCliente(): void {
@@ -32,6 +35,12 @@ export class FormComponent implements OnInit {
           .subscribe((cliente) => (this.cliente = cliente));
       }
     });
+  }
+
+  public cargarRegiones(): void {
+    this.clienteService
+      .getRegiones()
+      .subscribe((regiones) => (this.regiones = regiones));
   }
 
   public create(): void {
@@ -50,7 +59,6 @@ export class FormComponent implements OnInit {
         this.errores = err.error.errors as string[];
         console.error('Codigo del error desde el backend: ' + err.status);
         console.error(err.error.errors);
-
       }
     );
   }
