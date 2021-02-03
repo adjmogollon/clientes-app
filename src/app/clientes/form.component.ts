@@ -64,6 +64,7 @@ export class FormComponent implements OnInit {
   }
 
   public update(): void {
+    console.log(this.cliente);
     this.clienteService.update(this.cliente).subscribe(
       (response) => {
         this.route.navigate(['/clientes']);
@@ -79,5 +80,10 @@ export class FormComponent implements OnInit {
         console.error(err.error.errors);
       }
     );
+  }
+  public compararRegion(o1: Region, o2: Region): boolean {
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
+      ? false
+      : o1.id === o2.id;
   }
 }
