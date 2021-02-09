@@ -24,8 +24,20 @@ export class ClienteService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getRegiones(): Observable<Region[]>{
-    return this.http.get<Region[]>(this.urlEndPoint + '/regiones');
+  private isNotAuthorized(e): boolean {
+    if (e.status == 401 || e.status == 403) {
+      this.router.navigate(['/login']);
+      return true;
+    }
+  }
+
+  getRegiones(): Observable<Region[]> {
+    return this.http.get<Region[]>(this.urlEndPoint + '/regiones').pipe(
+      catchError((e) => {
+        this.isNotAuthorized(e);
+        return throwError(e);
+      })
+    );
   }
 
   getClientes(page: number): Observable<any> {
@@ -57,6 +69,9 @@ export class ClienteService {
   getCliente(id): Observable<Cliente> {
     return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`).pipe(
       catchError((e) => {
+        if (this.isNotAuthorized(e)) {
+          return throwError(e);
+        }
         this.router.navigate(['/clientes']);
         console.error(e.error.mensaje);
         Swal.fire('Error al editar', e.error.mensaje, 'error');
@@ -71,6 +86,10 @@ export class ClienteService {
       .pipe(
         map((response: any) => response.cliente as Cliente),
         catchError((e) => {
+          if (this.isNotAuthorized(e)) {
+            return throwError(e);
+          }
+
           if (e.status === 400) {
             return throwError(e);
           }
@@ -88,6 +107,10 @@ export class ClienteService {
       })
       .pipe(
         catchError((e) => {
+
+          if (this.isNotAuthorized(e)) {
+            return throwError(e);
+          }
           if (e.status === 400) {
             return throwError(e);
           }
@@ -106,6 +129,10 @@ export class ClienteService {
       })
       .pipe(
         catchError((e) => {
+
+          if (this.isNotAuthorized(e)) {
+            return throwError(e);
+          }
           console.error(e.error.mensaje);
           Swal.fire(e.error.mensaje, e.error.error, 'error');
           return throwError(e);
@@ -127,6 +154,11 @@ export class ClienteService {
       }
     );
 
-    return this.http.request(req);
+    return this.http.request(req).pipe(
+      catchError((e) => {
+        this.isNotAuthorized(e);
+        return throwError(e);
+      })
+    );
   }
 }
