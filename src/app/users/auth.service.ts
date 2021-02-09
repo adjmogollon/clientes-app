@@ -61,6 +61,7 @@ export class AuthService {
     this._user.username = paylaod.user_name;
     this._user.createAt = paylaod.createAt;
     this._user.authorities = paylaod.authorities;
+    console.log(this._user);
     sessionStorage.setItem('user', JSON.stringify(this._user));
   }
 
