@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { URLSearchParams } from 'url';
 import { User } from './user';
 
 @Injectable({
@@ -22,7 +21,10 @@ export class AuthService {
     params.set('grant_type', 'password');
     params.set('username', user.username);
     params.set('password', user.password);
+    console.log(params.toString());
 
-    return this.http.post(urlEndpoint, params, { headers: httpHeaders });
+    return this.http.post(urlEndpoint, params.toString(), {
+      headers: httpHeaders,
+    });
   }
 }
