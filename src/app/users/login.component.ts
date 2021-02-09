@@ -22,14 +22,19 @@ export class LoginComponent implements OnInit {
     if (this.user.username == null || this.user.password == null) {
       Swal.fire('Login Error', 'Empty username or password', 'error');
     }
+
     this.authService.login(this.user).subscribe((response) => {
       console.log(response);
-      let payload = JSON.parse(atob(response.access_token.split('.')[1]));
-      console.log(payload);
+
+      this.authService.saveUser(response.access_token);
+      this.authService.saveToken(response.access_token);
+
+      let user = this.authService.user;
+
       this.router.navigate(['/clientes']);
       Swal.fire(
         'Login',
-        `Hola ${payload.user_name}, has iniciado sesion con exito`,
+        `Hola ${user.username}, has iniciado sesion con exito`,
         'success'
       );
     });
