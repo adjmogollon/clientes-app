@@ -7,7 +7,6 @@ import { User } from './user';
   providedIn: 'root',
 })
 export class AuthService {
-
   private _user: User;
   private _token: string;
 
@@ -86,12 +85,18 @@ export class AuthService {
     return false;
   }
 
+  hasAuthority(authoriry: string): boolean {
+    if (this.user.authorities.includes(authoriry)) {
+      return true;
+    }
+    return false;
+  }
+
   loguot() {
     this._token = null;
     this._user = null;
     sessionStorage.clear();
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('user');
-
   }
 }
