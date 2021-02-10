@@ -54,6 +54,7 @@ export class ClienteService {
       this.router.navigate(['/clientes']);
       return true;
     }
+    return false;
   }
 
   getRegiones(): Observable<Region[]> {
