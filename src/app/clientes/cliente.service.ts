@@ -21,21 +21,11 @@ import { AuthService } from '../users/auth.service';
 export class ClienteService {
   private urlEndPoint: string = 'http://localhost:8080/api/clientes';
 
-  private httpHeaders = new HttpHeaders({ 'Content-type': 'application/json' });
-
   constructor(
     private http: HttpClient,
     private router: Router,
     private authService: AuthService
   ) {}
-
-  private addAuthorizationHeader(): HttpHeaders {
-    let token = this.authService.token;
-    if (token != null) {
-      return this.httpHeaders.append('Authorization', 'Bearer ' + token);
-    }
-    return this.httpHeaders;
-  }
 
   private isNotAuthorized(e): boolean {
     if (e.status == 401) {
@@ -59,9 +49,7 @@ export class ClienteService {
 
   getRegiones(): Observable<Region[]> {
     return this.http
-      .get<Region[]>(this.urlEndPoint + '/regiones', {
-        headers: this.addAuthorizationHeader(),
-      })
+      .get<Region[]>(this.urlEndPoint + '/regiones')
       .pipe(
         catchError((e) => {
           this.isNotAuthorized(e);
@@ -98,9 +86,7 @@ export class ClienteService {
 
   getCliente(id): Observable<Cliente> {
     return this.http
-      .get<Cliente>(`${this.urlEndPoint}/${id}`, {
-        headers: this.addAuthorizationHeader(),
-      })
+      .get<Cliente>(`${this.urlEndPoint}/${id}`)
       .pipe(
         catchError((e) => {
           if (this.isNotAuthorized(e)) {
@@ -116,7 +102,7 @@ export class ClienteService {
 
   create(cliente: Cliente): Observable<Cliente> {
     return this.http
-      .post(this.urlEndPoint, cliente, { headers: this.httpHeaders })
+      .post(this.urlEndPoint, cliente)
       .pipe(
         map((response: any) => response.cliente as Cliente),
         catchError((e) => {
@@ -136,9 +122,7 @@ export class ClienteService {
   }
   update(cliente: Cliente): Observable<any> {
     return this.http
-      .put<any>(`${this.urlEndPoint}/${cliente.id}`, cliente, {
-        headers: this.addAuthorizationHeader(),
-      })
+      .put<any>(`${this.urlEndPoint}/${cliente.id}`, cliente)
       .pipe(
         catchError((e) => {
           if (this.isNotAuthorized(e)) {
@@ -157,9 +141,7 @@ export class ClienteService {
 
   delete(id: number): Observable<Cliente> {
     return this.http
-      .delete<Cliente>(`${this.urlEndPoint}/${id}`, {
-        headers: this.addAuthorizationHeader(),
-      })
+      .delete<Cliente>(`${this.urlEndPoint}/${id}`)
       .pipe(
         catchError((e) => {
           if (this.isNotAuthorized(e)) {
@@ -177,20 +159,13 @@ export class ClienteService {
     formData.append('archivo', archivo);
     formData.append('id', id);
 
-    let httpHeaders = new HttpHeaders();
-    let token = this.authService.token;
-
-    if (token != null) {
-      httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + token);
-    }
 
     const req = new HttpRequest(
       'POST',
       `${this.urlEndPoint}/upload`,
       formData,
       {
-        reportProgress: true,
-        headers: httpHeaders,
+        reportProgress: true
       }
     );
 
