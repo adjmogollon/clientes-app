@@ -21,6 +21,7 @@ import { DetalleComponent } from './clientes/detalle/detalle.component';
 import { LoginComponent } from './users/login.component';
 import { AuthGuard } from './users/guards/auth.guard';
 import { TokenInterceptor } from './users/interceptors/token.interceptor';
+import { AuthInterceptor } from './users/interceptors/auth.interceptor';
 
 registerLocaleData(localeES, 'es');
 
@@ -69,6 +70,7 @@ const routes: Routes = [
     ClienteService,
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
