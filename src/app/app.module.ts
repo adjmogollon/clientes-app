@@ -48,8 +48,18 @@ const routes: Routes = [
     data: { authority: 'ROLE_ADMIN' },
   },
   { path: 'login', component: LoginComponent },
-  { path: 'facturas/:id', component: DetalleFacturaComponent },
-  { path: 'facturas/form/:clienteId', component: FacturasComponent },
+  {
+    path: 'facturas/:id',
+    component: DetalleFacturaComponent,
+    canActivate: [AuthGuard, AuthGuard],
+    data: { authority: 'ROLE_USER' },
+  },
+  {
+    path: 'facturas/form/:clienteId',
+    component: FacturasComponent,
+    canActivate: [AuthGuard, AuthGuard],
+    data: { authority: 'ROLE_ADMIN' },
+  },
 ];
 
 @NgModule({
