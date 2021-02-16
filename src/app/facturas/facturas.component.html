@@ -67,12 +67,13 @@
           </tr>
         </tbody>
       </table>
-      <h4 class="float-right" *ngIf="factura.items.length > 0">Gran Total: <span class="badge badge-secondary">{{factura.calcularGranTotal()}}</span>
+      <h4 class="float-right" *ngIf="factura.items.length > 0">Gran Total: <span
+          class="badge badge-secondary">{{factura.calcularGranTotal()}}</span>
       </h4>
 
       <div class="form-group row">
         <div class="col-sm-2">
-          <input type="submit" value="Crear Factura" class="btn btn-secondary" class="form-control">
+          <input type="submit" (click)="create()" value="Crear Factura" class="btn btn-secondary" class="form-control">
         </div>
       </div>
 
