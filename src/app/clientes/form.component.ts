@@ -16,7 +16,7 @@ export class FormComponent implements OnInit {
   public errores: string[];
 
   constructor(
-    private clienteService: ClienteService,
+    public clienteService: ClienteService,
     private route: Router,
     private activatedRoute: ActivatedRoute
   ) {}
